@@ -21,7 +21,36 @@ import com.topic2.android.notes.domain.model.ColorModel
 import com.topic2.android.notes.util.fromHex
 import ui.components.NoteColor
 
-
+@Composable
+private fun ColorPicker(
+    colors: List<ColorModel>,
+    onColorSelect: (ColorModel) -> Unit
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(
+            text = "Color Picker",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(8.dp)
+        )
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            items(
+                colors.size
+            ) {
+                    itemIndex ->
+                val color = colors[itemIndex]
+                ColorItem(
+                    color = color,
+                    onColorSelect = onColorSelect
+                )
+            }
+        }
+    }
+}
 @Composable
 fun ColorItem(
     color: ColorModel,
